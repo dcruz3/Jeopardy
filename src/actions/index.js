@@ -10,10 +10,10 @@ function requestHotels() {
   }
 }
 
-function requestHotelsSuccess(json) {
+function requestHotelsSuccess(items) {
   return {
     type: HOTELS_SUCCESS,
-    items: json.map(hotel => hotel)
+    items
   }
 }
 
@@ -39,3 +39,54 @@ export function fetchHotels() {
 export const REVIEWS_REQUEST = 'REVIEWS_REQUEST';
 export const REVIEWS_SUCCESS = 'REVIEWS_SUCCESS';
 export const REVIEWS_FAILED = 'REVIEWS_FAILED';
+
+function requestReviews(hotelId) {
+  return {
+    type: REVIEWS_REQUEST,
+    hotelId
+  }
+}
+
+function requestReviewsSuccess(hotelId, items) {
+  return {
+    type: REVIEWS_SUCCESS,
+    hotelId,
+    items
+  }
+}
+
+function requestReviewsFailed(error) {
+  return {
+    type: REVIEWS_FAILED,
+    error
+  }
+}
+
+function fetchReviews(id) {
+  return (dispatch) => {
+    dispatch(requestReviews(id));
+    return fetch('http://fake-hotel-api.herokuapp.com/api/reviews?hotel_id=' + id)
+      .then(response => response.json())
+      .then(json => {
+        return dispatch(requestReviewsSuccess(id, json))
+      })
+      .catch(error => dispatch(requestReviewsFailed(id, error)))
+  }
+}
+
+function shouldFetchReviews(state, hotelId) {
+  const reviews = state.reviewsByHotel[hotelId]
+  if (!reviews) {
+    return true
+  } else {
+    return false
+  }
+}
+
+export function fetchReviewsIfNeeded(hotelId) {
+  return (dispatch, getState) => {
+    if (shouldFetchReviews(getState(), hotelId)) {
+      return dispatch(fetchReviews(hotelId))
+    }
+  }
+}
