@@ -15,11 +15,6 @@ class App extends Component {
     //this.searchHotels = this.searchHotels.bind(this)
   }
 
-  searchHotels() {
-    debugger;
-    //this.props.dispatch(fetchHotels);
-  }
-
   render() {
     const { isLoading, hotels, error } = this.props;
     return (
@@ -47,15 +42,15 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    isLoading: false,
-    hotels: []
+    isLoading: state.isLoading,
+    hotels: state.hotels.items
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onSearch: () => {
-      dispatch(fetchHotels)
+      dispatch(fetchHotels())
     }
   }
 }

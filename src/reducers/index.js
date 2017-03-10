@@ -3,9 +3,9 @@ import {
   HOTELS_REQUEST, HOTELS_SUCCESS, HOTELS_FAILED
 } from '../actions'
 
-function hotelsReducer(state = {
+function hotels(state = {
   isFetching: false,
-  hotels: []
+  items: []
 }, action) {
   switch (action.type) {
     case HOTELS_REQUEST:
@@ -15,12 +15,12 @@ function hotelsReducer(state = {
     case HOTELS_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        hotels: action.hotels
+        items: action.items
       })
     case HOTELS_FAILED:
       return Object.assign({}, state, {
         isFetching: false,
-        hotels: [],
+        items: [],
         error: state.error
       })
     default:
@@ -29,7 +29,7 @@ function hotelsReducer(state = {
 }
 
 const rootReducer = combineReducers({
-  hotelsReducer
+  hotels
 })
 
 export default rootReducer;

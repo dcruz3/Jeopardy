@@ -13,7 +13,7 @@ function requestHotels() {
 function requestHotelsSuccess(json) {
   return {
     type: HOTELS_SUCCESS,
-    hotels: json.data.children.map(child => child.data)
+    items: json.map(hotel => hotel)
   }
 }
 
@@ -25,11 +25,13 @@ function requestHotelsFailed(error) {
 }
 
 export function fetchHotels() {
-  return dispatch => {
-    dispatch(requestHotels);
-    return fetch('http://fake-hotel-api.herokuapp.com/api/hotels')
+  return (dispatch) => {
+    dispatch(requestHotels());
+    return fetch('http://fake-hotel-api.herokuapp.com/api/hotels?count=5')
       .then(response => response.json())
-      .then(json => dispatch(requestHotelsSuccess(json)))
+      .then(json => {
+        return dispatch(requestHotelsSuccess(json))
+      })
       .catch(error => dispatch(requestHotelsFailed(error)))
   }
 }
