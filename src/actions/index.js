@@ -30,7 +30,12 @@ export function fetchHotels() {
     return fetch('http://fake-hotel-api.herokuapp.com/api/hotels?count=5')
       .then(response => response.json())
       .then(json => {
-        return dispatch(requestHotelsSuccess(json))
+        if(json.error) {
+          return dispatch(requestHotelsFailed(json.error))
+        }
+        else {
+          return dispatch(requestHotelsSuccess(json))
+        }
       })
       .catch(error => dispatch(requestHotelsFailed(error)))
   }

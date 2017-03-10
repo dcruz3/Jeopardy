@@ -6,7 +6,8 @@ import {
 
 function hotels(state = {
   isFetching: false,
-  items: []
+  items: [],
+  error: false
 }, action) {
   switch (action.type) {
     case HOTELS_REQUEST:

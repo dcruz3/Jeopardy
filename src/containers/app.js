@@ -11,22 +11,38 @@ import Hotels from '../components/hotels';
 class App extends Component {
 
   render() {
-    const { isLoading, hotels, error } = this.props;
+    const { isLoading, hotels } = this.props;
+
     return (
       <div>
         <Header onClick={() => this.props.onSearch()} />
-        {isLoading &&
+
+        {this.renderErrorMessage()}
+
+        {hotels.isFetching &&
           <h2>Loading...</h2>
         }
-        {!isLoading && hotels.length == 0 &&
+        {!hotels.error && !hotels.isFetching && hotels.items && hotels.items.length == 0 &&
           <h2>No Hotels</h2>
         }
-        {!isLoading && hotels.length > 0 &&
-          <Hotels hotels={hotels} reviewsByHotel={this.props.reviewsByHotel} onShowReviews={this.props.onShowReviews}/>
+
+        {!hotels.error && !hotels.isFetching && hotels.items &&
+          <Hotels hotels={hotels.items} reviewsByHotel={this.props.reviewsByHotel} onShowReviews={this.props.onShowReviews}/>
         }
 
       </div>
     );
+  }
+
+  renderErrorMessage() {
+    const { error } = this.props.hotels
+    if(!error) {
+      return
+    }
+
+    return (
+      <h1> An error has ocurred: {error} </h1>
+    )
   }
 }
 
@@ -35,8 +51,7 @@ function mapStateToProps(state) {
 
 
   return {
-    hotels: hotels.items,
-    isLoading: hotels.isFetching,
+    hotels,
     reviewsByHotel
   }
 }
