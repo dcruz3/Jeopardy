@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import logo from '../assets/logo.svg';
 import '../styles/app.css';
 
 import { fetchHotels, fetchReviewsIfNeeded } from '../actions'
@@ -11,10 +10,10 @@ import Hotels from '../components/hotels';
 class App extends Component {
 
   render() {
-    const { isLoading, hotels } = this.props;
+    const { hotels, reviewsByHotel, onShowReviews } = this.props;
 
     return (
-      <div>
+      <div className="app container">
         <Header onClick={() => this.props.onSearch()} />
 
         {this.renderErrorMessage()}
@@ -22,12 +21,9 @@ class App extends Component {
         {hotels.isFetching &&
           <h2>Loading...</h2>
         }
-        {!hotels.error && !hotels.isFetching && hotels.items && hotels.items.length == 0 &&
-          <h2>No Hotels</h2>
-        }
 
         {!hotels.error && !hotels.isFetching && hotels.items &&
-          <Hotels hotels={hotels.items} reviewsByHotel={this.props.reviewsByHotel} onShowReviews={this.props.onShowReviews}/>
+          <Hotels hotels={hotels.items} reviewsByHotel={reviewsByHotel} onShowReviews={onShowReviews}/>
         }
 
       </div>
@@ -41,7 +37,12 @@ class App extends Component {
     }
 
     return (
-      <h1> An error has ocurred: {error} </h1>
+
+      <div className="well">
+          <h2> An error has ocurred </h2>
+          <p>{error}</p>
+      </div>
+
     )
   }
 }

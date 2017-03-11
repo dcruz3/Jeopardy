@@ -12,7 +12,8 @@ function hotels(state = {
   switch (action.type) {
     case HOTELS_REQUEST:
       return Object.assign({}, state, {
-        isFetching: true
+        isFetching: true,
+        error: null
       })
     case HOTELS_SUCCESS:
       return Object.assign({}, state, {

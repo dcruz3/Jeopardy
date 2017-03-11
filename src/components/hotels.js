@@ -20,13 +20,11 @@ export default class Hotels extends Component {
 
   render() {
     return (
-      <ul>
-        {this.props.hotels.map((hotel, i) =>
-          <li key={i}>
-            <Hotel {...hotel} onShowReviews={this.getReviews} reviews={this.props.reviewsByHotel[hotel.id]}/>
-          </li>
-        )}
-      </ul>
+        <div>
+          {this.props.hotels.map((hotel, i) =>
+            <Hotel key={i} {...hotel} onShowReviews={this.getReviews} reviews={this.props.reviewsByHotel[hotel.id]} show={false}/>
+          )}
+        </div>
     )
   }
 }
