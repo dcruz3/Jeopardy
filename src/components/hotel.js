@@ -33,38 +33,31 @@ export default class Hotel extends Component {
         rating.push('\u2606');
     }
 
-    let reviewsButtonText = this.state.showingReviews ? this.props.reviews.isFetching ? 'Loading reviews' : 'Hide reviews' : 'Show reviews';
+    let reviewsButtonText = this.state.showingReviews ? this.props.reviews.isFetching ? 'Loading Answer' : 'Hide Answer' : 'Show Answer';
 
     return (
       <div>
         <div className="hotel-row row well">
           <div className="hotel-row-img col-md-4">
             <div className="img-container">
-              <img src={this.props.images[0]} />
+              
             </div>
           </div>
           <div className="col-md-8">
             <div className="hotel-header row">
               <div className="pull-left">
-                <h3>{this.props.name}</h3>
-                <span>{this.props.city} - {this.props.country}</span>
+                <h3>Question: {this.props.question}</h3>
+              
               </div>
-              <div className="hotel-stars pull-right">
-                  {rating.map((star,i) => <i key={i}>{star}</i>)}
-              </div>
+              
             </div>
-            <div className="row hotel-body">
-              <p> {this.props.description} </p>
-            </div>
+           
 
             <div className="row">
               <div className="pull-left">
-                  <button className="btn btn-default" onClick={this.showReviews}>{reviewsButtonText}</button>
+                  <button className="btn btn-danger" onClick={this.showReviews}>{reviewsButtonText}</button>
               </div>
-              <div className="pull-right hotel-footer-right">
-                <span className="hotel-price">{this.props.price} {'\u20AC'}</span>
-                <span>{(new Date(this.props.date_start)).toLocaleDateString('de-DE')} - {(new Date(this.props.date_end)).toLocaleDateString('de-DE')} </span>
-              </div>
+            
             </div>
 
           </div>

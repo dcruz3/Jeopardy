@@ -9,10 +9,10 @@ export default class Header extends Component {
         <div className="container-fluid">
           <div className="navbar-header">
             <a className="navbar-brand" href="#" onClick={this.props.onLogoClicked}>
-              Hotel Searcher
+              Jeopardy
             </a>
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <button className="btn btn-default" onClick={onClick}> Load Hotels </button>
+              <button className="btn btn-primary" onClick={onClick}> Load Question </button>
             </div>
           </div>
         </div>

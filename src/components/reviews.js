@@ -21,8 +21,7 @@ export default class Reviews extends Component {
 
               </div>
               <div className="col-md-10">
-                  <p className="review-name"><b>{review.name}</b></p>
-                  <p>{review.comment}</p>
+                  <p className="review-name"><b>{review.answer}</b></p>
               </div>
             </div>
           )}

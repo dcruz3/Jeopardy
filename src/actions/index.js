@@ -27,7 +27,7 @@ function requestHotelsFailed(error) {
 export function fetchHotels() {
   return (dispatch) => {
     dispatch(requestHotels());
-    return fetch('http://fake-hotel-api.herokuapp.com/api/hotels?count=5')
+    return fetch('http://jservice.io/api/random')
       .then(response => response.json())
       .then(json => {
         if(json.error) {
@@ -70,7 +70,7 @@ function requestReviewsFailed(error) {
 function fetchReviews(id) {
   return (dispatch) => {
     dispatch(requestReviews(id));
-    return fetch('http://fake-hotel-api.herokuapp.com/api/reviews?hotel_id=' + id)
+    return fetch('http://jservice.io/api/random')
       .then(response => response.json())
       .then(json => {
         return dispatch(requestReviewsSuccess(id, json))
