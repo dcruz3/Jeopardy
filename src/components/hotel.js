@@ -46,6 +46,7 @@ export default class Hotel extends Component {
           <div className="col-md-8">
             <div className="hotel-header row">
               <div className="pull-left">
+                <h4>This Question is Worth {this.props.value} points</h4>
                 <h3>Question: {this.props.question}</h3>
               
               </div>
